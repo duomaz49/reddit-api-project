@@ -27,15 +27,18 @@ export default function Home() {
 
   return (
     <>
+      <Container
+        fluid
+        className="vh-100 d-flex flex-column justify-content-center align-items-center"
+      >
       <NavBar />
-      <Container fluid className="mt-5 p-5 h-100 d-flex flex-column justify-content-center align-items-center">
-          {isLoading ? (
-            <ResponsiveSpinner />
-          ) : (
-            <div className="w-75 w-sm-100">
+        {isLoading ? (
+          <ResponsiveSpinner />
+        ) : (
+          <div className="w-75 w-sm-100">
             <PostsCarousel posts={posts} />
-            </div>
-          )}
+          </div>
+        )}
       </Container>
     </>
   )

@@ -4,7 +4,7 @@ export default function ResponsiveSpinner() {
   return (
     <Spinner
       color="success"
-      className="mt-5"
+      className="m-auto"
       style={{
         width: "20vw",
         height: "20vw",
