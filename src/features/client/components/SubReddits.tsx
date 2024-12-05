@@ -34,7 +34,6 @@ export default function SubReddits(props: SubRedditsProps) {
             subReddits={subReddits}
             handleSubRedditSelect={handleSubRedditSelect}
             selected={selectedSubReddit}
-            dispatch={dispatch}
           />
         </div>
       }
