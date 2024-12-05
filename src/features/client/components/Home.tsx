@@ -32,11 +32,10 @@ export default function Home() {
           {isLoading ? (
             <ResponsiveSpinner />
           ) : (
-            <div className="w-75">
+            <div className="w-75 w-sm-100">
             <PostsCarousel posts={posts} />
             </div>
           )}
-
       </Container>
     </>
   )

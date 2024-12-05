@@ -69,16 +69,16 @@ export default function PostsCarousel({ posts, ...args }: CarouselProps) {
               src={post.url}
               alt={post.title}
               style={{
-                maxWidth: "100%",
-                maxHeight: "70vh",
+                width: "100%",
+                height: "70vh",
                 margin: "auto"
               }}
-              className="d-block w-100 rounded-5"
+              className="d-block w-100 rounded-5 mobile"
               onError={handleImageError}
             />
           ) : (
             <div
-              className="d-flex justify-content-center align-items-center bg-secondary-subtle rounded-5"
+              className="d-flex justify-content-center align-items-center bg-secondary-subtle rounded-5 mobile"
               style={{
                 width: "100%",
                 height: "70vh",
