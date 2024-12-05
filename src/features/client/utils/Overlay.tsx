@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 interface OverlayProps {
@@ -9,11 +10,16 @@ interface OverlayProps {
 }
 
 export default function OverlayComponent(props: OverlayProps) {
+  const { children, isOpen, toggle, title } = props;
     return (
-        <Modal id="fancybox" isOpen={props.isOpen} toggle={props.toggle} backdrop="static" keyboard={false}>
-            <ModalHeader toggle={props.toggle} >{props.title}</ModalHeader>
-            <ModalBody>
-                {props.children && React.Children.map(props.children, (child, index) => (
+        <Modal id="fancybox" isOpen={isOpen} toggle={toggle} keyboard={false}>
+            <ModalHeader toggle={toggle}>{title}</ModalHeader>
+            <ModalBody style={{
+                maxHeight: 'calc(100vh - 210px)',
+                overflowY: 'auto',
+                overflowX: 'hidden',
+            }}>
+                {children && React.Children.map(children, (child, index) => (
                     <div key={index} className="w-100">
                         {child}
                     </div>

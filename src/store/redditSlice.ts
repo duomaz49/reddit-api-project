@@ -15,9 +15,11 @@ export const fetchPosts = (subreddit) => async (dispatch) => {
     const postsWithMetadata = posts.map((post) => ({
       ...post,
       showingComments: false,
-      comments: [],
-      loadingComments: false,
-      errorComments: false,
+      comments: {
+        data: [],
+        isLoading: false,
+        error: false,
+      },
     }));
     dispatch(getPostsSuccess(postsWithMetadata));
   } catch (error) {
@@ -64,19 +66,23 @@ const redditSlice = createSlice({
     startGetComments(state, action) {
       const post = state.posts[action.payload];
       post.showingComments = !post.showingComments;
-      if(!state.posts[action.payload].comments) {
-        return;
+
+      if (!post.comments) {
+        post.comments = { data: [], isLoading: true, error: false };
+      } else {
+        post.comments.isLoading = true;
+        post.comments.error = false;
       }
-      state.posts[action.payload].comments.isLoading = true;
-      state.posts[action.payload].comments.error = false;
     },
     getCommentsSuccess(state, action) {
-      state.posts[action.payload.index].comments.isLoading = false;
-      state.posts[action.payload.index].comments.data = action.payload.comments;
+      const post = state.posts[action.payload.index];
+      post.comments.isLoading = false;
+      post.comments.data = action.payload.comments;
     },
     getCommentsFailure(state, action) {
-      state.posts[action.payload].comments.isLoading = false;
-      state.posts[action.payload].comments.error = true;
+      const post = state.posts[action.payload];
+      post.comments.isLoading = false;
+      post.comments.error = true;
     },
   }
 });
@@ -95,6 +101,7 @@ export const {
 
 export default redditSlice.reducer;
 
-const selectPosts = (state) => state.reddit.posts;
-export const selectSelectedSubreddit = (state) =>
-  state.reddit.selectedSubreddit;
+export const selectPosts = (state) => state.reddit.posts;
+
+export const selectPostComments = (postIndex) =>
+  createSelector([selectPosts], (posts) => posts[postIndex]?.comments || {});

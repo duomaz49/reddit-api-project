@@ -3,7 +3,7 @@ import { fetchSubreddits, selectSubreddits } from "../../../store/subRedditSlice
 import { selectSelectedSubreddit, setSelectedSubreddit } from "../../../store/redditSlice"
 import { useEffect } from "react"
 import type { AppDispatch } from "../../../store/store"
-import GenericList from "../utils/GenericList"
+import SubRedditList from "./SubRedditList"
 import { Spinner } from "reactstrap"
 import SkeletonLoader from "../utils/Skeletonloader"
 
@@ -16,7 +16,7 @@ export default function SubReddits(props: SubRedditsProps) {
   const dispatch = useAppDispatch<AppDispatch>()
   const subReddits = useAppSelector(selectSubreddits)
   const isLoading = useAppSelector((state) => state.subReddit.isLoading)
-  const selectedSubReddit = useAppSelector(selectSelectedSubreddit)
+  const selectedSubReddit = useAppSelector((state) => state.reddit.selectedSubreddit)
 
 
   useEffect(() => {
@@ -29,19 +29,14 @@ export default function SubReddits(props: SubRedditsProps) {
   }
   return (
     <>
-      {
-        isLoading ?
-          <SkeletonLoader
-            length={subReddits?.length}/>
+      {isLoading ?
+          <SkeletonLoader length={subReddits?.length}/>
           :
           <div className="w-auto">
-            <GenericList
-              items={subReddits}
-              onItemClick={handleSubRedditSelect}
+            <SubRedditList
+              subReddits={subReddits}
+              handleSubRedditSelect={handleSubRedditSelect}
               selected={selectedSubReddit}
-              title="SubReddits"
-              buttonClassName="btn btn-light"
-              listAsRowClassName="list-group"
               dispatch={dispatch}
             />
           </div>

@@ -1,8 +1,8 @@
-import { Container, Spinner } from "reactstrap"
+import { Container } from "reactstrap"
 import NavBar from "../utils/NavBar"
 import type { AppDispatch } from "../../../store/store"
 import { useAppDispatch, useAppSelector } from "../../../store/hooks"
-import { fetchComments } from "../../../store/redditSlice"
+import { fetchComments, selectPosts } from "../../../store/redditSlice"
 import { useEffect } from "react"
 import { fetchPosts } from "../../../store/redditSlice"
 import PostsCarousel from "./PostsCarousel"
@@ -13,17 +13,15 @@ export default function Home() {
   const reddit = useAppSelector((state) => state.reddit)
   const { isLoading, error, selectedSubreddit } = reddit
 
-  const posts = useAppSelector((state) => state.reddit.posts)
+  const posts = useAppSelector(selectPosts)
 
   useEffect(() => {
     dispatch(fetchPosts(selectedSubreddit))
   }, [dispatch, selectedSubreddit])
 
-  const onToggleComments = (i) => () => {
-    return (permalink) => {
-      dispatch(fetchComments(i, permalink))
-    }
-  }
+  const onToggleComments: (i: number, permalink: string) => void = (i, permalink) => {
+    dispatch(fetchComments(i, permalink));
+  };
 
   return (
     <>
@@ -36,7 +34,10 @@ export default function Home() {
           <ResponsiveSpinner />
         ) : (
           <div className="w-75 w-sm-100">
-            <PostsCarousel posts={posts} />
+            <PostsCarousel
+              posts={posts}
+              onToggleComments={onToggleComments}
+            />
           </div>
         )}
       </Container>
