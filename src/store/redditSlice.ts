@@ -1,5 +1,6 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 import { getSubRedditPosts, getPostComments } from '../utils/api/api';
+import { AppDispatch, RootState } from "./store.ts"
 
 const initialState = {
   posts: [],
@@ -8,7 +9,7 @@ const initialState = {
   selectedSubreddit: '',
 };
 
-export const fetchPosts = (subreddit) => async (dispatch) => {
+export const fetchPosts = (subreddit: string) => async (dispatch: AppDispatch) => {
   try {
     dispatch(startGetPosts());
     const posts = await getSubRedditPosts(subreddit);
@@ -93,7 +94,7 @@ export const {
   getPostsSuccess,
   startGetPosts,
   setSelectedSubreddit,
-  toggleShowingComments,
+  toggleShowComments,
   getCommentsFailure,
   getCommentsSuccess,
   startGetComments,
@@ -101,7 +102,7 @@ export const {
 
 export default redditSlice.reducer;
 
-export const selectPosts = (state) => state.reddit.posts;
+export const selectPosts = (state: RootState) => state.reddit.posts;
 
 export const selectPostComments = (postIndex) =>
   createSelector([selectPosts], (posts) => posts[postIndex]?.comments || {});
