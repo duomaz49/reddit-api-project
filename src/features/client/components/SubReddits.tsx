@@ -17,8 +17,6 @@ export default function SubReddits(props: SubRedditsProps) {
   const subReddits = useAppSelector(selectSubreddits)
   const isLoading = useAppSelector((state) => state.subReddit.isLoading)
   const selectedSubReddit = useAppSelector((state) => state.reddit.selectedSubreddit)
-
-
   useEffect(() => {
     dispatch(fetchSubreddits())
   }, [dispatch])

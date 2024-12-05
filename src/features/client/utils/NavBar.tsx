@@ -7,7 +7,7 @@ import {
   OffcanvasBody,
   OffcanvasHeader
 } from "reactstrap"
-import { FaReddit } from "react-icons/fa"
+import { FaArrowRight, FaReddit } from "react-icons/fa"
 import { useState } from "react"
 import SubReddits from "../components/SubReddits"
 
@@ -17,25 +17,27 @@ export default function NavBar(args) {
   const toggleOffcanvas = () => setIsOffcanvasOpen(!isOffcanvasOpen)
 
   return (
-    <Navbar {...args} fixed="top" color="warning" light>
-      <NavbarBrand href="/">
-        <FaReddit className="me-2" style={{ fontSize: 40 }} />Reddit Minimal
+    <Navbar {...args} fixed="top" color="warning" light className="d-flex flex-nowrap justify-content-between align-items-center">
+      <NavbarBrand href="/" className="d-flex align-items-center">
+        <FaReddit className="me-2" style={{ fontSize: 40 }} />
+        Reddit Minimal
       </NavbarBrand>
-      <NavbarToggler onClick={toggleOffcanvas} />
-
+      <div className="d-flex align-items-center ms-auto">
+        <span className="me-3 d-flex align-items-center">
+          Choose a category <FaArrowRight className='ms-2' />
+        </span>
+        <NavbarToggler onClick={toggleOffcanvas} />
+      </div>
       <Offcanvas isOpen={isOffcanvasOpen} direction="end" toggle={toggleOffcanvas}>
-        <OffcanvasHeader
-          className="bg-warning-subtle"
-          toggle={toggleOffcanvas}>SubReddits</OffcanvasHeader>
-        <OffcanvasBody
-          className="bg-warning-subtle">
+        <OffcanvasHeader className="bg-warning-subtle" toggle={toggleOffcanvas}>
+          SubReddit categories
+        </OffcanvasHeader>
+        <OffcanvasBody className="bg-warning-subtle">
           <Nav navbar>
-            <SubReddits
-              toggleOffcanvas={toggleOffcanvas}
-            />
+            <SubReddits toggleOffcanvas={toggleOffcanvas} />
           </Nav>
         </OffcanvasBody>
       </Offcanvas>
     </Navbar>
-  )
-}
+  );
+};

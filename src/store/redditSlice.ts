@@ -5,7 +5,7 @@ const initialState = {
   posts: [],
   error: false,
   isLoading: false,
-  selectedSubreddit: '/r/pics/',
+  selectedSubreddit: '',
 };
 
 export const fetchPosts = (subreddit) => async (dispatch) => {
