@@ -101,7 +101,7 @@ export default function PostsCarousel(props: CarouselProps) {
         <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
         <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
       </Carousel>
-      <div className="d-flex justify-content-center mt-3">
+      <div className="d-flex justify-content-center m-auto mt-3 w-75">
         <Button
           block
           color="info"
