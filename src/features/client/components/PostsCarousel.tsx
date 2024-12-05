@@ -60,6 +60,7 @@ export default function PostsCarousel(props: CarouselProps) {
         next={next}
         previous={previous}
         interval={false}
+        dark
       >
         <CarouselIndicators
           items={posts.map((_, i) => ({ id: i }))}
@@ -78,7 +79,7 @@ export default function PostsCarousel(props: CarouselProps) {
               <img
                 src={post.url}
                 alt={post.title}
-                className="d-block w-100 rounded-5"
+                className="d-block w-75 rounded-5 m-auto"
                 style={{
                   height: "60vh",
                   objectFit: "cover" }}
