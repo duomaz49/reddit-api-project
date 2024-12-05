@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react"
 import {
   Carousel,
   CarouselItem,
@@ -7,12 +7,13 @@ import {
   CarouselCaption,
   Button,
 } from "reactstrap";
-import { FaExclamationTriangle } from "react-icons/fa";
+import { CiImageOff } from "react-icons/ci";
 import OverlayComponent from "../utils/Overlay";
 import Comment from "./Comment";
 import { selectPostComments } from "../../../store/redditSlice";
 import { useAppSelector } from "../../../store/hooks";
 import { IPost } from "../../../types/IPost"
+import moment from "moment/moment"
 
 interface CarouselProps {
   posts: IPost[];
@@ -66,24 +67,31 @@ export default function PostsCarousel({ posts, onToggleComments }: CarouselProps
           <CarouselItem
             key={i}
           >
+            <div className="text-center my-3">
+              <h4 className="text-break">{post.title}</h4>
+              <p className="text-muted text-break">{`${moment.unix(post.created_utc).fromNow()} by ${post.author}`}</p>
+            </div>
             {isImageUrl(post.url) ? (
               <img
                 src={post.url}
                 alt={post.title}
                 className="d-block w-100 rounded-5"
-                style={{ height: "70vh", objectFit: "cover" }}
+                style={{
+                  height: "60vh",
+                  objectFit: "cover" }}
                 onError={handleImageError}
               />
             ) : (
               <div
-                className="d-flex justify-content-center align-items-center bg-secondary rounded-5"
-                style={{ height: "70vh" }}
+                className="d-flex justify-content-center align-items-center rounded-5"
+                style={{
+                  height: "60vh"
+              }}
               >
-                <FaExclamationTriangle style={{ fontSize: "10vw", color: "red" }} />
+                <CiImageOff style={{ fontSize: "10vw", color: "orange" }} />
                 <div className="text-muted ms-2">Image not available</div>
               </div>
             )}
-            <CarouselCaption captionHeader={post.title} captionText={post.title} />
           </CarouselItem>
         ))}
         <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
@@ -99,7 +107,6 @@ export default function PostsCarousel({ posts, onToggleComments }: CarouselProps
           Show Comments
         </Button>
       </div>
-      {/* Overlay for Comments */}
       <OverlayComponent isOpen={overlayIsOpen} toggle={toggleOverlay} title="Comments">
         {comments.isLoading ? (
           <div>Loading comments...</div>

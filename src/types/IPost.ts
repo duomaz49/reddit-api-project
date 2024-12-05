@@ -5,5 +5,7 @@ export interface IPost {
   title: string;
   caption: string;
   permalink: string;
+  created_utc: number;
+  author: string;
   comments: IComment[];
 }
