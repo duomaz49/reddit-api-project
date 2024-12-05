@@ -71,9 +71,9 @@ export default function PostsCarousel(props: CarouselProps) {
           <CarouselItem
             key={i}
           >
-            <div className="text-center my-3">
-              <h4 className="text-break">{post.title}</h4>
-              <p className="text-muted text-break">{`${moment.unix(post.created_utc).fromNow()} by ${post.author}`}</p>
+            <div className="text-center my-3 mobile">
+              <h4 className="text-break mobile">{post.title}</h4>
+              <p className="text-muted text-break mobile">{`${moment.unix(post.created_utc).fromNow()} by ${post.author}`}</p>
             </div>
             {isImageUrl(post.url) ? (
               <img

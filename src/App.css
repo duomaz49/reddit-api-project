@@ -7,3 +7,14 @@
   box-sizing: border-box;
   overflow-x: hidden;
 }
+
+.mobile {
+  font-size: 1rem;
+  word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  .mobile {
+    font-size: 0.675rem;
+  }
+}
