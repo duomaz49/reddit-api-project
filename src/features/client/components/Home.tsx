@@ -19,28 +19,23 @@ export default function Home() {
     dispatch(fetchPosts(selectedSubreddit))
   }, [dispatch, selectedSubreddit])
 
-  const onToggleComments: (i: number, permalink: string) => void = (i, permalink) => {
-    dispatch(fetchComments(i, permalink));
-  };
-
   return (
     <>
       <Container
         fluid
         className="vh-100 d-flex flex-column justify-content-center align-items-center"
       >
-      <NavBar />
+        <NavBar />
         {isLoading ? (
           <ResponsiveSpinner />
+        ) : error ? (
+          <h1 className='fw-bold'>Error loading posts too many requests. Please try again later.</h1>
         ) : (
           <div className="w-75 w-sm-100">
-            <PostsCarousel
-              posts={posts}
-              onToggleComments={onToggleComments}
-            />
+            <PostsCarousel posts={posts} />
           </div>
         )}
       </Container>
     </>
-  )
+  );
 }

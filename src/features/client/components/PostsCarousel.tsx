@@ -4,36 +4,30 @@ import {
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption,
   Button,
 } from "reactstrap";
 import { CiImageOff } from "react-icons/ci";
 import OverlayComponent from "../utils/Overlay";
 import Comment from "./Comment";
-import { selectPostComments } from "../../../store/redditSlice";
-import { useAppSelector } from "../../../store/hooks";
-import { IPost } from "../../../types/IPost"
+import { fetchComments, selectPostComments } from "../../../store/redditSlice"
+import { useAppDispatch, useAppSelector } from "../../../store/hooks"
+import type { IPost } from "../../../types/IPost"
 import moment from "moment/moment"
+import type { AppDispatch } from "../../../store/store"
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
 interface CarouselProps {
   posts: IPost[];
-  onToggleComments: (i: number, permalink: string) => void;
 }
 
-export default function PostsCarousel({ posts, onToggleComments }: CarouselProps) {
+export default function PostsCarousel(props: CarouselProps) {
+  const { posts } = props;
+  const dispatch = useAppDispatch<AppDispatch>();
   const [activeIndex, setActiveIndex] = useState(0);
   const [overlayIsOpen, setOverlayIsOpen] = useState(false);
-  const comments = useAppSelector(
-    selectPostComments(activeIndex)
-  );
+  const comments = useAppSelector(selectPostComments(activeIndex));
 
   const toggleOverlay = () => setOverlayIsOpen(!overlayIsOpen);
-
-  const showComments = () => {
-    const permalink = posts[activeIndex].permalink;
-    onToggleComments(activeIndex, permalink);
-    toggleOverlay();
-  };
 
   const next = () => {
     const nextIndex = activeIndex === posts.length - 1 ? 0 : activeIndex + 1;
@@ -49,6 +43,15 @@ export default function PostsCarousel({ posts, onToggleComments }: CarouselProps
 
   const isImageUrl = (url: string) =>
     /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i.test(url);
+
+  useEffect(() => {
+    if (posts.length > 0) {
+      const permalink = posts[activeIndex]?.permalink;
+      if (permalink) {
+        dispatch(fetchComments(activeIndex, permalink));
+      }
+    }
+  }, [activeIndex, dispatch]);
 
   return (
     <>
@@ -103,8 +106,8 @@ export default function PostsCarousel({ posts, onToggleComments }: CarouselProps
           color="info"
           outline
           className='rounded-3'
-          onClick={showComments}>
-          Show Comments
+          onClick={toggleOverlay}>
+          {comments.isLoading ? <AiOutlineLoading3Quarters /> : comments.data?.length} Comments
         </Button>
       </div>
       <OverlayComponent isOpen={overlayIsOpen} toggle={toggleOverlay} title="Comments">
