@@ -1,10 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../../../store/hooks"
 import { fetchSubreddits, selectSubreddits } from "../../../store/subRedditSlice"
-import { selectSelectedSubreddit, setSelectedSubreddit } from "../../../store/redditSlice"
+import { setSelectedSubreddit } from "../../../store/redditSlice"
 import { useEffect } from "react"
 import type { AppDispatch } from "../../../store/store"
 import SubRedditList from "./SubRedditList"
-import { Spinner } from "reactstrap"
 import SkeletonLoader from "../utils/Skeletonloader"
 
 interface SubRedditsProps {
@@ -28,16 +27,16 @@ export default function SubReddits(props: SubRedditsProps) {
   return (
     <>
       {isLoading ?
-          <SkeletonLoader length={subReddits?.length}/>
-          :
-          <div className="w-auto">
-            <SubRedditList
-              subReddits={subReddits}
-              handleSubRedditSelect={handleSubRedditSelect}
-              selected={selectedSubReddit}
-              dispatch={dispatch}
-            />
-          </div>
+        <SkeletonLoader length={subReddits?.length} />
+        :
+        <div className="w-auto">
+          <SubRedditList
+            subReddits={subReddits}
+            handleSubRedditSelect={handleSubRedditSelect}
+            selected={selectedSubReddit}
+            dispatch={dispatch}
+          />
+        </div>
       }
     </>
   )

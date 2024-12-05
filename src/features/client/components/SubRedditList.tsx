@@ -1,9 +1,8 @@
 import { ListGroup, ListGroupItem } from "reactstrap"
 import { FaReddit } from "react-icons/fa"
-import type { ISubReddit } from "../../../types/ISubReddit"
 
 interface SubRedditListProps{
-  subReddits: ISubReddit[];
+  subReddits: any[];
   handleSubRedditSelect: (subReddit: string) => void;
   title?: string;
   selected?: string;
