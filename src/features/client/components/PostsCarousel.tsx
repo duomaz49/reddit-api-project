@@ -138,11 +138,11 @@ export default function PostsCarousel(props: CarouselProps) {
       title="Picture"
     >
       <div className='text-center mobile mb-2'>
-        {posts[activeIndex].title}
+        {posts[activeIndex]?.title}
       </div>
       <img
-        src={posts[activeIndex].url}
-        alt={posts[activeIndex].title}
+        src={posts[activeIndex]?.url}
+        alt={posts[activeIndex]?.title}
         className="d-block w-75 rounded-5 m-auto"
         style={{
           height: "60vh",
