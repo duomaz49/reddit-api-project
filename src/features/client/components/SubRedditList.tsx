@@ -4,16 +4,14 @@ import { FaReddit } from "react-icons/fa"
 interface SubRedditListProps{
   subReddits: any[];
   handleSubRedditSelect: (subReddit: string) => void;
-  title?: string;
   selected?: string;
-  listAsRowClassName?: string;
 }
 
-export default function SubRedditList<T>(props: SubRedditListProps) {
+export default function SubRedditList(props: SubRedditListProps) {
   const { subReddits, handleSubRedditSelect, selected } = props
   return (
     <>
-      <h6 className="text-center mt-4 mb-4">SubReddits</h6>
+      <h6 className="text-center mt-4 mb-4">SubRe<span className="text-danger">dd</span>its</h6>
       <ListGroup className='list-group'>
         {subReddits?.map((subReddit) => (
           <ListGroupItem

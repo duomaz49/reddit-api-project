@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks"
 import { selectPosts } from "../../../store/redditSlice"
 import { useEffect } from "react"
 import { fetchPosts } from "../../../store/redditSlice"
-import PostsCarousel from "./PostsCarousel"
+import PostsList from "./PostsList"
 import ResponsiveSpinner from "../utils/ResponsiveSpinner"
 
 export default function Home() {
@@ -24,13 +24,13 @@ export default function Home() {
     <>
       <Container
         fluid
-        className="vh-100 d-flex flex-column justify-content-center align-items-center"
+        className="h-100 mt-5 p-5 d-flex flex-column justify-content-center align-items-center"
       >
         <NavBar />
         {selectedSubreddit === "" && (
           <>
             <h1 className="text-center">
-              Welcome to Reddit Minimal!
+              Welcome to Re<span className="text-danger">dd</span>it Minimal!
             </h1>
             <p>Please select a subreddit category from the header to view posts</p>
           </>
@@ -43,8 +43,11 @@ export default function Home() {
           </h1>
         ) : (
           selectedSubreddit && (
-            <div className="w-75 w-sm-100">
-              <PostsCarousel posts={posts} />
+            <div className="w-50 w-sm-100">
+              <PostsList
+                posts={posts}
+                selectedSubreddit={selectedSubreddit}
+              />
             </div>
           )
         )}

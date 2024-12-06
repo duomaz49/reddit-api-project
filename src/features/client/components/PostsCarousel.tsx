@@ -85,12 +85,11 @@ export default function PostsCarousel(props: CarouselProps) {
               onClick={togglePictureOverlay}
             >
               <img
-                src={post.url}
+                src={post.thumbnail}
                 alt={post.title}
                 className="d-block w-75 rounded-5 m-auto"
                 style={{
-                  height: "60vh",
-                  objectFit: "cover"
+                  height: "20%",
                 }}
                 onError={handleImageError}
               />

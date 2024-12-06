@@ -20,7 +20,7 @@ export default function NavBar(args) {
     <Navbar {...args} fixed="top" color="warning" light className="d-flex flex-nowrap justify-content-between align-items-center">
       <NavbarBrand href="/" className="d-flex align-items-center">
         <FaReddit className="me-2" style={{ fontSize: 40 }} />
-        Reddit Minimal
+        Re<span className="text-danger">dd</span>it Minimal
       </NavbarBrand>
       <div className="d-flex align-items-center ms-auto">
         <span className="me-3 d-flex align-items-center">
@@ -30,7 +30,7 @@ export default function NavBar(args) {
       </div>
       <Offcanvas isOpen={isOffcanvasOpen} direction="end" toggle={toggleOffcanvas}>
         <OffcanvasHeader className="bg-warning-subtle" toggle={toggleOffcanvas}>
-          SubReddit categories
+          SubRe<span className="text-danger">dd</span>it categories
         </OffcanvasHeader>
         <OffcanvasBody className="bg-warning-subtle">
           <Nav navbar>
