@@ -8,7 +8,6 @@ import OverlayComponent from "../utils/Overlay.tsx"
 import Comment from "./Comment.tsx"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import moment from "moment"
-import { CiImageOff } from "react-icons/ci"
 
 interface PostsList {
   posts: IPost[];

@@ -17,8 +17,9 @@ export default function SubRedditList(props: SubRedditListProps) {
           <ListGroupItem
             key={subReddit.id}
             onClick={() => handleSubRedditSelect(subReddit.url)}
-            className={`${selected === subReddit.url ? "bg-secondary-subtle" : 'btn btn-light'} d-flex justify-content-start align-items-center border rounded-pill mb-2`}>
-            {subReddit.icon_img ? <img
+            className={`${selected === subReddit.url ? "bg-secondary-subtle" : 'btn btn-light'} d-flex justify-content-start align-items-center border rounded-pill mb-2 shadow-sm`}>
+            {subReddit.icon_img ?
+              <img
               src={subReddit.icon_img}
               alt={`${subReddit.display_name}`}
               className="img-fluid"
