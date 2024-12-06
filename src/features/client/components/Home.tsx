@@ -13,6 +13,7 @@ export default function Home() {
   const reddit = useAppSelector((state) => state.reddit)
   const { isLoading, error, selectedSubreddit } = reddit
   const posts = useAppSelector(selectPosts)
+  const windowWidth = window.innerWidth
 
   useEffect(() => {
     if (selectedSubreddit === "") return
@@ -43,7 +44,7 @@ export default function Home() {
           </h1>
         ) : (
           selectedSubreddit && (
-            <div className="w-50 w-sm-100">
+            <div className={`${windowWidth < 768 ? 'w-100' : 'w-50'}`}>
               <PostsList
                 posts={posts}
                 selectedSubreddit={selectedSubreddit}
