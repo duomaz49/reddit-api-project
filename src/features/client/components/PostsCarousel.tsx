@@ -145,7 +145,7 @@ export default function PostsCarousel(props: CarouselProps) {
         alt={posts[activeIndex]?.title}
         className="d-block w-75 rounded-5 m-auto"
         style={{
-          height: "60vh",
+          height: "100%",
           objectFit: "cover"
         }}
         onError={handleImageError}
