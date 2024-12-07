@@ -47,13 +47,14 @@ export default function PostsList(props: PostsList) {
             key={i}
             onClick={() => (activeIndex !== i ? setActiveIndex(i) : null)}
             className="shadow-sm"
+
           >
             {isImageUrl(post.url) && (
               <CardImg
                 top
                 src={post.url}
                 alt={post.title}
-                className="rounded-top"
+                className="rounded-top cursor-pointer"
                 onClick={togglePictureOverlay}
               />
             )}
