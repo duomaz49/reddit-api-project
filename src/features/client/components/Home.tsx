@@ -22,14 +22,13 @@ export default function Home() {
 
 
   return (
-    <>
       <Container
         fluid
-        className="vh-100 mt-5 p-5 d-flex flex-column justify-content-center align-items-center"
+        className="min-vh-100 d-flex flex-column justify-content-center align-items-center"
       >
         <NavBar />
         {selectedSubreddit === "" && (
-          <div className="card text-center shadow-lg p-4 mb-5 bg-white rounded" style={{ maxWidth: "600px" }}>
+          <div className="card text-center shadow-lg p-4 mb-5 bg-light-subtle" style={{ maxWidth: "600px", opacity: 0.9 }}>
             <div className="card-body">
               <h1 className="card-title fw-bold">
                 Welcome to Re<span className="text-danger">dd</span>it Minimal!
@@ -57,6 +56,5 @@ export default function Home() {
           )
         )}
       </Container>
-    </>
   );
 }
