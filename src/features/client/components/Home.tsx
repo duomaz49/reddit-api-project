@@ -25,16 +25,20 @@ export default function Home() {
     <>
       <Container
         fluid
-        className="h-100 mt-5 p-5 d-flex flex-column justify-content-center align-items-center"
+        className="vh-100 mt-5 p-5 d-flex flex-column justify-content-center align-items-center"
       >
         <NavBar />
         {selectedSubreddit === "" && (
-          <>
-            <h1 className="text-center">
-              Welcome to Re<span className="text-danger">dd</span>it Minimal!
-            </h1>
-            <p>Please select a subreddit category from the header to view posts</p>
-          </>
+          <div className="card text-center shadow-lg p-4 mb-5 bg-white rounded" style={{ maxWidth: "600px" }}>
+            <div className="card-body">
+              <h1 className="card-title fw-bold">
+                Welcome to Re<span className="text-danger">dd</span>it Minimal!
+              </h1>
+              <p className="card-text text-muted">
+                Please select a subreddit category from the header to view posts
+              </p>
+            </div>
+          </div>
         )}
         {isLoading && selectedSubreddit ? (
           <ResponsiveSpinner />
